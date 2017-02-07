@@ -28,17 +28,26 @@ use \Drupal\Core\Form\FormStateInterface;
 /**
  * Implements hook_form_alter().
  */
-function d8module_example_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+// function d8module_example_form_alter(&$form,$form_state, $form_id) {
 
+//   if ($form_id == 'user_login_form') {
+//     $form['best_animal'] = [
+//       '#type' => 'radios',
+//       '#title' => t('Whats the best animal'),
+//       '#options' => [t('Cat'), t('Dog'), t('Lhama'), t('Dragon')],
+//     ];
+//   }
+// }
+
+/**
+ * Implementation of hook_form_FORM_ID_alter().
+ */
+function d8module_example_form_user_login_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'user_login_form') {
     $form['best_animal'] = [
       '#type' => 'radios',
       '#title' => t('Whats the best animal'),
-      '#options' => [t('Cat'), t('Dog'), t('Lhama'), t('Dragon')],
+      '#options' => [t('Cat'), t('Dog'), t('Lhama'), t('Dragon'), t('Lizard')],
     ];
   }
-  dpm($form_id);
-  kint($form);
 }
-
-
