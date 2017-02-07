@@ -22,3 +22,23 @@ function d8module_example_help($route_name, RouteMatchInterface $route_match) {
     default:
   }
 }
+
+use \Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function d8module_example_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  if ($form_id == 'user_login_form') {
+    $form['best_animal'] = [
+      '#type' => 'radios',
+      '#title' => t('Whats the best animal'),
+      '#options' => [t('Cat'), t('Dog'), t('Lhama'), t('Dragon')],
+    ];
+  }
+  dpm($form_id);
+  kint($form);
+}
+
+

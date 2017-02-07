@@ -1,5 +1,9 @@
-name: name: Simple d8 module example
+name: Simple d8 module example
 type: module
 description: A simple module d8 module example.
 core: 8.x
 package: Custom
+
+
+
+
