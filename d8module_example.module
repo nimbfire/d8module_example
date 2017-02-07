@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains simple_module.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function d8module_example_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the simple_module module.
+    case 'help.page.simple_module':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('A simple module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
