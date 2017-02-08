@@ -28,26 +28,29 @@ use \Drupal\Core\Form\FormStateInterface;
 /**
  * Implements hook_form_alter().
  */
-// function d8module_example_form_alter(&$form,$form_state, $form_id) {
-
-//   if ($form_id == 'user_login_form') {
-//     $form['best_animal'] = [
-//       '#type' => 'radios',
-//       '#title' => t('Whats the best animal'),
-//       '#options' => [t('Cat'), t('Dog'), t('Lhama'), t('Dragon')],
-//     ];
-//   }
-// }
+function d8module_example_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Chamado em todos os forms, duas vezes.
+  // Uma quando o form vai ser exibido para o usuário
+  // E outra depois de o usuário clicar no submit do form.
+}
 
 /**
  * Implementation of hook_form_FORM_ID_alter().
  */
-function d8module_example_form_user_login_form_alter(&$form, &$form_state, $form_id) {
-  if ($form_id == 'user_login_form') {
-    $form['best_animal'] = [
-      '#type' => 'radios',
-      '#title' => t('Whats the best animal'),
-      '#options' => [t('Cat'), t('Dog'), t('Lhama'), t('Dragon'), t('Lizard')],
-    ];
+function d8module_example_form_user_login_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  $form['best_animal'] = [
+    '#type' => 'radios',
+    '#title' => t('What is the best animal?'),
+    '#options' => [t('Cat'), t('Dog'), t('Lhama'), t('Dragon'), t('Lizard')],
+  ];
+  $form['#validate'][] = 'd8module_example_best_animal_validate_form';
+}
+
+/**
+ * Validate the best_animal.
+ */
+function d8module_example_best_animal_validate_form(array &$form, FormStateInterface $form_state) {
+  if ($form_state->getValue('best_animal') != 0) {
+    $form_state->setErrorByName('best_animal', t('Sorry, wrong animal.'));
   }
 }
